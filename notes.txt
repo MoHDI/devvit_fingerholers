@@ -1,0 +1,35 @@
+Heideltraut — Today at 8:55 AM
+I use a vite setup that builds it into the "webroot" folder
+I use the full phaser version
+Drew — Today at 8:56 AM
+I was going to do that but wasn't sure how to keep phaser code that wasn't compiled separate
+Heideltraut — Today at 8:56 AM
+i ues the EXPAND mode for scaling
+Drew — Today at 8:56 AM
+ahhh!
+Heideltraut — Today at 8:56 AM
+and bind a resizer listener and repositon everything
+this.scale.on('resize', this.resize, this)
+
+    resize() {
+        this.score.setPosition(this.scale.width / 2, 12)
+        if (!this.isGameStarted) {
+            this.player.setPosition(200, this.scale.height / 2 - 100)
+            this.intro.setPosition(this.player.x + 100, this.player.y + 100)
+            this.introText.setPosition(this.player.x, this.player.y + 75)
+        }
+    }
+`
+smth like this
+Drew — Today at 8:57 AM
+coding is like magic that I can do but I'm not totally sure how magic works
+Heideltraut — Today at 8:57 AM
+It is important to remove that listener then you switch scenes so you wont have multiple resize listeners on the same scene
+E.g.
+globalEventEmitter.once(
+            'gameOver',
+            (data: { isNewHighscore: boolean; newScore: number; highscore: number; attempts: number }) => {
+                this.scale.off('resize', this.resize, this)
+                this.scene.run('GameOver', data)
+            }
+        )
