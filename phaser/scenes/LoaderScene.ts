@@ -15,13 +15,16 @@ export class LoaderScene extends Phaser.Scene {
       loadingBar.setScale(value, 1);
     });
 
+    // this.load.bitmapFont('mslight', 'assets/fonts/Mini-Sans-Light-2X-table-18-20.png', 'assets/fonts/Mini-Sans-Light-2X.fnt');
+
     // Load all assets required for the game
     this.load.image('ball', 'assets/heart.gif');
-    this.load.image('hand', 'assets/hand.png');
+    this.load.image('hand', 'assets/hand_point.png');
     this.load.image('pigs', 'assets/crews/crew_1.png');
     this.load.image('machine', 'assets/small_400.png');
     this.load.image('newImage', 'assets/buy.gif');
     this.load.image('club', 'assets/club_400x240.png');
+   
   }
 
   create(): void {

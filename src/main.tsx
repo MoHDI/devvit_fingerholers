@@ -47,7 +47,7 @@ Devvit.addCustomPostType({
       switch (msg.type) {
         case 'setCounter':
           await context.redis.set(`counter_${context.postId}`, msg.data.newCounter.toString());
-          context.ui.webView.postMessage('myWebView', {
+          context.ui.webView.postMessage('gameView', {
             type: 'updateCounter',
             data: {
               currentCounter: msg.data.newCounter,
@@ -67,7 +67,7 @@ Devvit.addCustomPostType({
     // When the button is clicked, send initial data to web view and show it
     const onShowWebviewClick = () => {
       setWebviewVisible(true);
-      context.ui.webView.postMessage('myWebView', {
+      context.ui.webView.postMessage('gameView', {
         type: 'initialData',
         data: {
           username: username,
@@ -83,6 +83,7 @@ Devvit.addCustomPostType({
       // height={webviewVisible ? '0%' : '100%'}
       height='100%'
       width='100%'
+      border='thin'
       alignment="middle center">
         {/* Background Image */}
       <image
@@ -92,9 +93,10 @@ Devvit.addCustomPostType({
       imageWidth="400px"
       imageHeight="240px"
       resizeMode="cover"
+    
       
     />
-
+        
         <vstack
           grow={!webviewVisible}
           height={webviewVisible ? '0%' : '100%'}
@@ -103,29 +105,30 @@ Devvit.addCustomPostType({
           // border="thick"
           padding='large'
         >
-          {/* <text size="xlarge" weight="bold">
-            Fingerholers!
-          </text> */}
+      
          
           <vstack>
           <button size="large"  onPress={onShowWebviewClick}>Play Fingerholers Game</button>
          </vstack>
         </vstack>
         <vstack grow={webviewVisible} height={webviewVisible ? '100%' : '0%'}     width='100%'>
-          <vstack border="none" backgroundColor='gray' borderColor="black" height={webviewVisible ? '100%' : '0%'} grow width='100%'  alignment="middle center" >
+          <vstack border="none" backgroundColor='black' borderColor="black" height={webviewVisible ? '100%' : '0%'} grow width='100%'  alignment="middle center" >
             <webview
-              id="myWebView"
+              id="gameView"
               // url="page_temp.html"
-             url="game/index.html"
+             url="index.html"
               onMessage={(msg) => onMessage(msg as WebViewMessage)}
               grow
               // height={webviewVisible ? '100%' : '0%'}
-              width={webviewVisible ? '100%' : '0%'}
+              // width={webviewVisible ? '100%' : '0%'}
+              width='100%'
+              height='100%'
             />
             {/* <text size="xlarge" weight="bold">Fingerholers</text> */}
           </vstack>
         </vstack>
-      </zstack>
+        </zstack>
+
     );
   },
   

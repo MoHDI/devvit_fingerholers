@@ -2,14 +2,15 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: 'phaser',
+  base: '', // Use relative paths
   // publicDir: 'phaser/public/',
   server: {
     port: 3000
   },
   build: {
     copyPublicDir: true, 
-    outDir: '../webroot/game', // devvit webview
-  emptyOutDir: true, 
+    outDir: '../webroot/', // devvit webview
+  // emptyOutDir: true, 
   
     // sourcemap: true
     // assetsDir: 'assets', // Prevent Vite from creating an "assets" subfolder
